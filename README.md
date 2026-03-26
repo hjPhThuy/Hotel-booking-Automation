@@ -1,7 +1,8 @@
 #  Hotel Booking Automation
 
 ##  About This Project
-This is a personal QA Automation project built to practice testing a hotel booking system.  
+
+- This is a personal QA Automation project built to practice testing a hotel booking system.  
 The goal is to simulate real user flows (search → book → validate) and ensure the system works as expected.
 ---
 ##  What I Tested
