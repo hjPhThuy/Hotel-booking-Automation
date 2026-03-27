@@ -12,7 +12,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void testSearchRoom() {
 
-        // 👉 login (reuse lại)
+        // login (reuse lại)
         LoginPage login = new LoginPage(driver, wait);
         login.login("pthuy@gmail.com", "123456");
 
@@ -20,11 +20,11 @@ public class SearchTest extends BaseTest {
                 ExpectedConditions.urlContains("login")
         ));
 
-        // 👉 search
+        // search
         HomePage home = new HomePage(driver, wait);
         home.searchRoom("Hồ Chí Minh");
 
-        // 👉 verify result
+        // verify result
         Assertions.assertTrue(home.isResultListDisplayed());
     }
 }

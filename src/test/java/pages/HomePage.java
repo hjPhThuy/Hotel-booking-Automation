@@ -41,7 +41,7 @@ public class HomePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
     }
 
-    // 🔥 VERIFY LIST RESULT (CHUẨN QA)
+    // VERIFY LIST RESULT (CHUẨN QA)
     public boolean isResultListDisplayed() {
         try {
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(resultItems));
