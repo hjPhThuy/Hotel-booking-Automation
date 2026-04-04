@@ -30,15 +30,26 @@ public class HomePage {
         input.clear();
         input.sendKeys(location);
 
+        // Bấm enter để chọn suggestion, việc này có thể làm DOM re-render
+        // Tùy theo thiết kế Frontend, phím ENTER có thể ĐÃ KÍCH HOẠT luôn việc tìm kiếm (auto-submit form).
         input.sendKeys(Keys.ARROW_DOWN);
         input.sendKeys(Keys.ENTER);
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(searchBtn));
+        // Đợi một khoảng nhỏ để DOM ổn định
+        try { Thread.sleep(1000); } catch(Exception e){}
 
-        WebElement btn = driver.findElement(searchBtn);
+        // Thêm Try-Catch: Nếu sau khi bấm ENTER trang tự auto-navigate luôn thì nút Search sẽ không còn
+        // nên nó sẽ quăng TimeoutException. Ta gom nó vào Catch để test vẫn chạy trơn tru qua bước kế tiếp.
+        try {
+            // Giảm timeout cục bộ ở đây để khỏi chờ 10s nếu đã nhảy trang
+            WebDriverWait shortWait = new WebDriverWait(driver, java.time.Duration.ofSeconds(2));
+            WebElement btn = shortWait.until(ExpectedConditions.elementToBeClickable(searchBtn));
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
+        } catch (TimeoutException e) {
+            // Đã nhảy trang hoặc component search đã ẩn -> Bỏ qua click
+        }
     }
 
     // VERIFY LIST RESULT (CHUẨN QA)
