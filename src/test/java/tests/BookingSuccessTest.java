@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.*;
 
-public class BookingTest extends BaseTest {
+public class BookingSuccessTest extends BaseTest {
 
     @Test
     public void testBookingFlow() {
